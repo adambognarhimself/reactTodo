@@ -1,0 +1,62 @@
+html {
+    font-family: 'Segoe UI', sans-serif; // Font
+    font-size: 16px; // Font mérete (16px=12pt)
+    line-height: 1.5; // Sormagasság, 16px*1.5=24px, tipikus mostanában
+    background: #333336; // Sötét téma sötét háttérrel
+    color: white; // Sötét téma fehér betűkkel
+}
+
+html,
+body,
+div {
+    margin: 0; // CSS reset
+    padding: 0; // CSS reset
+    display: grid; // grid-re állunk át mindenhol
+    grid: minmax(0, 1fr) / minmax(0, 1fr); // Az egyetlen gyerek szülő méretű
+}
+
+body {
+    min-height: 100vh; // ablak méretű
+    max-height: 100vh; // ablak méretű
+    background-color: var(--html-background);
+    color: var(--html-color);
+    font-size: var(--font-size);
+    font-family: var(--font-family);
+}
+
+input,
+button,
+a {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    border: 0; // ne legyen kerete a buttonnak és az inputnak
+    color: inherit;
+}
+
+input {
+    background: black; // Sötét téma
+}
+
+button {
+    padding: 0; // Tágas
+    font-weight: 600; // Bold
+    background: transparent;
+
+}
+
+:root {
+    --html-background: white;
+    --html-color: black;
+    --font-size: 16px;
+    --font-family: Arial, sans-serif;
+  }
+
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}

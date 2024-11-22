@@ -1,0 +1,28 @@
+.SideBar {
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    background-color: #ededeb;
+    height: 100%; /* Ensure the sidebar spans the full height */
+}
+
+
+.projects {
+    display: flex;
+    flex-direction: column; /* Stack ProjectCards vertically */
+    align-items: flex-start; /* Align cards to the start of the container */
+    padding: 10px; /* Optional padding for spacing */
+    gap: 10px; /* Add spacing between cards */
+    overflow-y: auto; /* Allows scrolling if the content overflows */
+    box-sizing: border-box; /* Ensures padding and border are included in the width/height */
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    box-sizing: border-box;
+    background-color: white;
+}

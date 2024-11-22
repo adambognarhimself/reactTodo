@@ -1,0 +1,36 @@
+@keyframes floatIn {
+    0% {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.WelcomePage {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center elements horizontally */
+    justify-content: center; /* Center elements vertically */
+    height: 100vh; /* Full viewport height */
+    text-align: center; /* Center align text */
+}
+
+.WelcomePage p {
+    opacity: 0; /* Initially hidden */
+    animation: floatIn 1s ease-out forwards; /* Apply animation */
+    margin: 0;
+}
+
+.WelcomePage p:first-child {
+    font-size: 3rem; /* Larger font size for the first <p> */
+    font-weight: bold; /* Optional: Make it bold */
+    animation-delay: 0s; /* No delay for the first text */
+}
+
+.WelcomePage p:not(:first-child) {
+    font-size: 1.5rem; /* Slightly smaller font for other <p> elements */
+    animation-delay: 0.3s; /* Delay the animation for the second text */
+}

@@ -1,0 +1,51 @@
+.SideNavBar {
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    gap: 10px; /* Space between rows */
+    padding: 15px 20px;
+    border-bottom: 2px solid #c7c7c1;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.row {
+    display: flex; /* Horizontal layout for text and button */
+    justify-content: space-between; /* Space between text and button */
+    align-items: center; /* Vertically align items */
+    width: 100%; /* Ensure rows span full width */
+}
+
+.row p {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.row input {
+    
+    flex: 1; /* Allow the input to grow and take available space */
+    margin-right: 10px; /* Space between input and button */
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.row button {
+    background: #6b7bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 16px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: transform 0.1s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.row button:active {
+    transform: scale(0.95);
+    background: #505ed3;
+    box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
