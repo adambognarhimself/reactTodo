@@ -1,3 +1,9 @@
-.MainPage{
-    grid-template-columns: 1fr 1fr 1fr;
+.MainPage {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Create 3 equal-width columns */
+    padding: 10px; /* Optional padding around the grid */
+    width: 100%; /* Make sure it spans full width */
+    box-sizing: border-box; /* Includes padding and border in width calculations */
+    align-items:start; /* Ensures items only take up the height they need */
+    justify-items: center;
 }
