@@ -1,5 +1,6 @@
 import './ProjectCard.less'
 
+
 export type ProjectCardProps = {
     textContent: string;
     onClick: () => void;
@@ -8,9 +9,13 @@ export type ProjectCardProps = {
 }
 
 
-export function ProjectCard({textContent, onClick, iconName, onDelete}: ProjectCardProps){
+export function ProjectCard({ textContent, onClick, iconName, onDelete }: ProjectCardProps) {
     return <button class="ProjectCard" onClick={onClick}>
         <p>{textContent}</p>
-        <button onClick={onDelete}>{iconName}</button>
+        <button onClick={onDelete}>
+            <span class="material-symbols-outlined">
+                {iconName}
+            </span>
+        </button>
     </button>
 }

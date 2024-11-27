@@ -13,11 +13,13 @@ export function Screen() {
 
     const [selectedProject, setSelectedProject] = useState<number | null>(null);
 
+    const handleProjectSwitch = (newProjectId: number) => {
+        setSelectedProject(newProjectId); // Update the selected project
+    };
+
+
     return <div class="Screen">
         <SideBar setSelectedProject={setSelectedProject} />
-
-
-
 
         {selectedProject !== null ? (
 

@@ -1,5 +1,6 @@
 import { useState } from "preact/hooks";
 import "./SideNavBar.less";
+import "../../googleIcon.less"
 
 export type SideNavBarProps = {
     textContent: string;
@@ -29,7 +30,9 @@ export function SideNavBar({
             <div className="row">
                 <p>{textContent}</p>
                 <button onClick={() => setShowInputRow(!showInputRow)}>
-                    {iconName}
+                    <span class="material-symbols-outlined">
+                        {iconName}
+                    </span>
                 </button>
             </div>
 
@@ -42,7 +45,11 @@ export function SideNavBar({
                         onChange={(e) => setNewName((e.target as HTMLInputElement).value)}
                         placeholder="Enter project name"
                     />
-                    <button onClick={handleAddProject}>Add</button>
+                    <button onClick={handleAddProject}>
+                    <span class="material-symbols-outlined">
+                        check
+                    </span>
+                    </button>
                 </div>
             )}
         </div>

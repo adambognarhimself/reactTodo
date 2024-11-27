@@ -32,7 +32,7 @@ export function SideBar({setSelectedProject} : {setSelectedProject: (id:number) 
             <SideNavBar
                 textContent="Your projects"
                 onClick={addProject}
-                iconName="plus"
+                iconName="add"
                 newName={newName}
                 setNewName={setNewName}
             />
@@ -44,7 +44,7 @@ export function SideBar({setSelectedProject} : {setSelectedProject: (id:number) 
                         key={project.id}
                         textContent={project.title}
                         onClick={() => setSelectedProject(project.id)} 
-                        iconName="del"
+                        iconName="delete"
                         onDelete={() => deleteProject(project.id)}
                     />
                 ))}

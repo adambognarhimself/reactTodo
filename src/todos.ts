@@ -18,6 +18,7 @@ export enum State {
 
 class TODO{
     projects?: ProjectDto[];
+    #listeners: (() => void)[] = [];
 
     constructor(){
         const savedProjects = localStorage["projects"];
@@ -76,6 +77,13 @@ class TODO{
     // Get a single project by ID
     getProjectById(projectId: number) {
         return this.projects.find((project) => project.id === projectId);
+    }
+
+    addListener(listener: () => void) {
+        this.#listeners = [...this.#listeners, listener];
+    }
+    removeListener(listener: () => void) {
+        this.#listeners = this.#listeners.filter(x => x !== listener);
     }
 }
 

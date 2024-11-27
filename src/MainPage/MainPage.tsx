@@ -11,11 +11,11 @@ export function MainPage(){
 
     return <div className={"MainPage"}>
         
-        {/* <WelcomePage/> */}
+        {/* <WelcomePage/> 
 
         <BoardMain title = "TODO"/>
         <BoardMain title = "IN PROGRESS"/>
-        <BoardMain title = "DONE"/>
+        <BoardMain title = "DONE"/> */}
 
         
     </div>
