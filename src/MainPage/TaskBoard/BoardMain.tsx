@@ -1,4 +1,5 @@
 import { BoardHeader } from './BoardHeader';
+import { BoardItem } from './BoardItem';
 import './BoardMain.less'
 
 export type BoardMainProps = {
@@ -11,20 +12,18 @@ export function BoardMain({title}: BoardMainProps){
 
     return <div className={"BoardMain"}>
 
-        <BoardHeader title = {title} onClick={() => {}} iconName='add' />
-            p
-            <br />
-            p
-            p
-            <br />
-            p
-            p
-            <br />
-            p
+        <div class={"Header"}><BoardHeader title = {title} onClick={() => {}} iconName='add' /></div>
+        
+        <div className="Items">
+         <BoardItem title = "test" onClick={()=> {}} iconName="edit"/>
+         <BoardItem title = "test" onClick={()=> {}} iconName="edit"/>
+         <BoardItem title = "test" onClick={()=> {}} iconName="edit"/>
+         <BoardItem title = "test" onClick={()=> {}} iconName="edit"/>
+         <BoardItem title = "test" onClick={()=> {}} iconName="edit"/>
 
-            p
-            <br />
-            p
+        </div>
+        
+        
             
         
     </div>
