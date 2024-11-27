@@ -2,21 +2,28 @@ import React, { useState } from "react";
 import { ProjectCard } from "./ProjectCard/ProjectCard";
 import { SideNavBar } from "./SideNavBar/SideNavBar";
 import "./SideBar.less";
+import { todo } from "../todos";
 
-export function SideBar() {
-    const [projects, setProjects] = useState([]); // Initial cards
+export function SideBar({setSelectedProject} : {setSelectedProject: (id:number) => void}) {
+    const [projects, setProjects] = useState(todo.getProjects()); // Initial cards
     const [newName, setNewName] = useState("");
 
-    // Add a new card
-    const addProject = () => {
-        if (newName.trim() === "") return; // Prevent empty names
-        setProjects([...projects, newName]); // Add the new project
-        setNewName(""); // Clear the input
+    const refreshProjects = () => {
+        setProjects(todo.getProjects());
     };
 
-    // Delete a card
-    const deleteProject = (index: number) => {
-        setProjects(projects.filter((_, i) => i !== index)); // Remove the card by index
+    // Add a new project
+    const addProject = () => {
+        if (newName.trim() === "") return; // Prevent empty names
+        todo.addProject(newName);
+        setNewName("");
+        refreshProjects();
+    };
+
+    // Delete a project
+    const deleteProject = (id: number) => {
+        todo.deleteProject(id);
+        refreshProjects();
     };
 
     return (
@@ -27,17 +34,18 @@ export function SideBar() {
                 onClick={addProject}
                 iconName="plus"
                 newName={newName}
-                setNewName={setNewName} // Pass state handlers
+                setNewName={setNewName}
             />
 
             {/* Project Cards */}
             <div className="projects">
-                {projects.map((project, index) => (
+                {projects.map((project) => (
                     <ProjectCard
-                        key={index}
-                        textContent={project}
-                        onClick={() => deleteProject(index)} // Pass index to delete function
+                        key={project.id}
+                        textContent={project.title}
+                        onClick={() => setSelectedProject(project.id)} 
                         iconName="del"
+                        onDelete={() => deleteProject(project.id)}
                     />
                 ))}
             </div>

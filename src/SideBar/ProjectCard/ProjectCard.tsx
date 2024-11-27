@@ -4,12 +4,13 @@ export type ProjectCardProps = {
     textContent: string;
     onClick: () => void;
     iconName: string;
+    onDelete: () => void;
 }
 
 
-export function ProjectCard({textContent, onClick, iconName}: ProjectCardProps){
-    return <div class="ProjectCard">
+export function ProjectCard({textContent, onClick, iconName, onDelete}: ProjectCardProps){
+    return <button class="ProjectCard" onClick={onClick}>
         <p>{textContent}</p>
-        <button onClick={onClick}>{iconName}</button>
-    </div>
+        <button onClick={onDelete}>{iconName}</button>
+    </button>
 }
