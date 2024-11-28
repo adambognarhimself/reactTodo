@@ -18,12 +18,12 @@ export enum State {
 
 class TODO{
     projects?: ProjectDto[];
-    #listeners: (() => void)[] = [];
 
     constructor(){
         const savedProjects = localStorage["projects"];
         this.projects = savedProjects ? JSON.parse(savedProjects): [];
     }
+    
 
     saveProjects(){
         localStorage.setItem("projects", JSON.stringify(this.projects));
@@ -63,6 +63,15 @@ class TODO{
         this.saveProjects();
     }
 
+    updateItemTitle(projectId: number, itemTitle: string, newTitle: string){
+        const project = this.projects.find((project) => project.id === projectId);
+        if (!project) throw new Error(`Project with ID ${projectId} not found`);
+        const item = project.items.find((item) => item.title === itemTitle);
+        if (!item) throw new Error(`Item with title ${itemTitle} not found`);
+        item.title = newTitle;
+        this.saveProjects();
+    }
+
     removeItemFromProject(projectId: number, itemTitle: string) {
         const project = this.projects.find((project) => project.id === projectId);
         if (!project) throw new Error(`Project with ID ${projectId} not found`);
@@ -79,12 +88,6 @@ class TODO{
         return this.projects.find((project) => project.id === projectId);
     }
 
-    addListener(listener: () => void) {
-        this.#listeners = [...this.#listeners, listener];
-    }
-    removeListener(listener: () => void) {
-        this.#listeners = this.#listeners.filter(x => x !== listener);
-    }
 }
 
 export const todo = new TODO();

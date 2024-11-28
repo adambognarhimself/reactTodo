@@ -11,7 +11,9 @@ export function BoardHeader({title, onClick, iconName}: BoardHeaderProps){
     return <div class="BoardHeader">
                 <p>{title}</p>
                 <button onClick={onClick}>
-                    {iconName}
+                <span class="material-symbols-outlined">
+                        add
+                    </span>
                 </button>
     </div>
 }

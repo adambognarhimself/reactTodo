@@ -24,9 +24,9 @@
     color: white; /* White text */
     border: none; /* Remove default border */
     border-radius: 5px; /* Rounded corners for the button */
-    padding: 8px 12px; /* Add padding to the button */
+    padding: 5px 5px 5px 5px; /* Add padding to the button */
     cursor: pointer; /* Change cursor to pointer on hover */
-    font-size: 14px; /* Slightly larger font size for the button */
+    font-size: 0px; /* Slightly larger font size for the button */
     transition: transform 0.1s ease, background 0.2s ease, box-shadow 0.2s ease;
     display: inline-block; /* Fix any inline rendering inconsistencies */
     text-align: center;
@@ -39,4 +39,83 @@
 
 .BoardItem button:active {
     transform: scale(0.95); /* Slightly shrink the button when clicked */
+}
+
+.DropdownOptions {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.DropdownOptions li {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+}
+
+.DropdownOptions li:hover {
+    background: #f0f0f0;
+}
+
+
+.BoardItem.editing {
+    background-color: #e0e0e0; /* Light gray background in edit mode */
+    padding-top: 23px;
+    padding-left: 10px;
+}
+
+.EditTitleRow {
+    display: flex;
+    flex-direction: row; /* Align items horizontally */
+    align-items: center; /* Vertically center items */
+    justify-content: space-between; /* Space between input and buttons */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.EditTitleRow input {
+    flex-grow: 1;
+    padding: 8px 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s;
+    
+}
+
+.EditTitleRow input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 3px rgba(0, 123, 255, 0.5);
+}
+
+.EditTitleRow button {
+    padding: 8px 12px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-bottom: 8px;
+}
+
+.EditTitleRow button:hover {
+    background-color: #0056b3;
+}
+
+.EditTitleRow button:last-of-type {
+    background-color: #dc3545;
+}
+
+.EditTitleRow button:last-of-type:hover {
+    background-color: #a71d2a;
+}
+
+
+.left{
+    margin-left: 30px;
+    margin-right: 10px;
 }

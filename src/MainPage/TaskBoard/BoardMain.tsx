@@ -3,10 +3,21 @@ import { BoardHeader } from './BoardHeader';
 import { BoardItem } from './BoardItem';
 import './BoardMain.less';
 import { State, todo } from '../../todos';
+import { WelcomePage } from '../WelcomePage/WelcomePage';
+import { NewItem } from './NewItem';
 
-export function BoardMain({ projectId, state }: { projectId: number; state: State }) {
+
+export type BoardMainProps = {
+    projectId: number;
+    state: State;
+    triggerRefresh: boolean;
+    onItemMoved: () => void;
+}
+
+export function BoardMain({ projectId, state, triggerRefresh, onItemMoved, }: BoardMainProps) {
     const [project, setProject] = useState(todo.getProjectById(projectId));
-    const [triggerRefresh, setTriggerRefresh] = useState(false); // Add a state variable to trigger re-renders
+    const [newTaskTitle, setNewTaskTitle] = useState(null);
+    const [editTaskTitle, setEditTaskTitle] = useState(null);
 
     // Fetch project data when projectId changes or triggerRefresh updates
     useEffect(() => {
@@ -18,33 +29,63 @@ export function BoardMain({ projectId, state }: { projectId: number; state: Stat
     };
 
     const addTask = () => {
-        const title = prompt("Enter task title:");
-        if (!title) return;
-        todo.addItemToProject(projectId, { title, state });
-        setTriggerRefresh(!triggerRefresh); // Toggle triggerRefresh to force re-render
+        if (newTaskTitle && newTaskTitle.trim()) {
+            todo.addItemToProject(projectId, { title: newTaskTitle.trim(), state });
+            setNewTaskTitle(null); // Clear the input row
+            onItemMoved(); // Trigger a global refresh
+        }
+    };
+
+    const cancelNewTask = () => {
+        setNewTaskTitle(null); // Cancel the new task input
+    };
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+        if (event.key === 'Enter') {
+            addTask(); // Add task on Enter
+        } else if (event.key === 'Escape') {
+            cancelNewTask(); // Cancel input on Escape
+        }
     };
 
     // Update task state
     const updateTaskState = (taskTitle: string, newState: State) => {
         todo.updateItemState(projectId, taskTitle, newState);
-        setTriggerRefresh(!triggerRefresh); // Toggle triggerRefresh to force re-render
+        onItemMoved();
     };
+
+    const updateTasktitle =(title: string, newTitle: string)=>{
+        todo.updateItemTitle(projectId, title,newTitle);
+        onItemMoved();
+    }
 
     // Delete a task
     const deleteTask = (taskTitle: string) => {
         todo.removeItemFromProject(projectId, taskTitle);
-        setTriggerRefresh(!triggerRefresh); // Toggle triggerRefresh to force re-render
+        onItemMoved();
     };
 
-    if (!project) return <div>No project selected</div>;
+    if (!project) return <WelcomePage />;
 
     return (
         <div className="BoardMain">
             <div className="Header">
-                <BoardHeader title={state} onClick={addTask} iconName="add" />
+                <BoardHeader title={state} onClick={() => setNewTaskTitle("")} iconName="add" />
             </div>
 
             <div className="Items">
+
+                {newTaskTitle !== null && (
+                    <NewItem
+                        value={newTaskTitle}
+                        onChange={(e) => setNewTaskTitle((e.target as HTMLInputElement).value)}
+                        onKeyDown={handleKeyDown}
+                        addTask={addTask}
+                        cancelNewTask={cancelNewTask}
+                    />
+                )}
+
+
                 {/* Filter tasks based on the provided state */}
                 {project.items
                     .filter((item) => item.state === state) // Filter tasks by state
@@ -52,8 +93,9 @@ export function BoardMain({ projectId, state }: { projectId: number; state: Stat
                         <BoardItem
                             key={item.title}
                             title={item.title}
-                            onClick={() =>{}} // Example action
-                            iconName={item.state === State.TODO ? "edit" : "done"}
+                            onDelete={() => deleteTask(item.title)} // Example action
+                            onMove={(newState) => updateTaskState(item.title, newState as State)}
+                            onEditTitle={(title)=> updateTasktitle(item.title, title)}
                         />
                     ))}
             </div>

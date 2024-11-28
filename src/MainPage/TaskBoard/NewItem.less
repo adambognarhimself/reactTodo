@@ -1,0 +1,60 @@
+.NewTaskRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 5px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    margin-bottom: 0px;
+}
+
+.buttons{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 5px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.NewTaskRow input {
+    flex-grow: 1;
+    padding: 8px 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.NewTaskRow input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 3px rgba(0, 123, 255, 0.5);
+}
+
+.NewTaskRow button {
+    padding: 8px 12px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.NewTaskRow button:hover {
+    background-color: #0056b3;
+}
+
+.NewTaskRow button:last-of-type {
+    background-color: #dc3545;
+}
+
+.NewTaskRow button:last-of-type:hover {
+    background-color: #a71d2a;
+}

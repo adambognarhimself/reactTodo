@@ -12,11 +12,12 @@ import { State } from '../todos';
 export function Screen() {
 
     const [selectedProject, setSelectedProject] = useState<number | null>(null);
+    const [triggerRefresh, setTriggerRefresh] = useState(false);
 
-    const handleProjectSwitch = (newProjectId: number) => {
-        setSelectedProject(newProjectId); // Update the selected project
+     // Trigger a refresh
+     const refreshAllBoards = () => {
+        setTriggerRefresh(!triggerRefresh); // Toggle to force all boards to refresh
     };
-
 
     return <div class="Screen">
         <SideBar setSelectedProject={setSelectedProject} />
@@ -24,9 +25,24 @@ export function Screen() {
         {selectedProject !== null ? (
 
             <div className={"MainPage"}>
-                <BoardMain projectId={selectedProject} state={State.TODO} />
-                <BoardMain projectId={selectedProject}  state={State.IN_PROGRESS}/>
-                <BoardMain projectId={selectedProject} state={State.DONE}/>
+                 <BoardMain
+                        projectId={selectedProject}
+                        state={State.TODO}
+                        triggerRefresh={triggerRefresh}
+                        onItemMoved={refreshAllBoards} // Pass the refresh function
+                    />
+                    <BoardMain
+                        projectId={selectedProject}
+                        state={State.IN_PROGRESS}
+                        triggerRefresh={triggerRefresh}
+                        onItemMoved={refreshAllBoards}
+                    />
+                    <BoardMain
+                        projectId={selectedProject}
+                        state={State.DONE}
+                        triggerRefresh={triggerRefresh}
+                        onItemMoved={refreshAllBoards}
+                    />
             </div>
 
         ) : (
