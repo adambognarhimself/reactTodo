@@ -59,13 +59,20 @@ export function BoardMain({ projectId, state, triggerRefresh, onItemMoved, }: Bo
         onItemMoved();
     }
 
+    const updateTaskDate =(title: string, date: Date)=>{
+        todo.updateItemDate(projectId, title,date);
+        console.log("date saved")
+        console.log("Project after moving item:", todo.getProjectById(projectId));
+        onItemMoved();
+    }
+
     // Delete a task
     const deleteTask = (taskTitle: string) => {
         todo.removeItemFromProject(projectId, taskTitle);
         onItemMoved();
     };
 
-    if (!project) return <WelcomePage />;
+    if (!project) return null;
 
     return (
         <div className="BoardMain">
@@ -96,6 +103,8 @@ export function BoardMain({ projectId, state, triggerRefresh, onItemMoved, }: Bo
                             onDelete={() => deleteTask(item.title)} // Example action
                             onMove={(newState) => updateTaskState(item.title, newState as State)}
                             onEditTitle={(title)=> updateTasktitle(item.title, title)}
+                            onSaveDate={(date) => updateTaskDate(item.title,date)}
+                            deadline={item.deadline}
                         />
                     ))}
             </div>

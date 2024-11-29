@@ -47,6 +47,11 @@
     margin: 0;
 }
 
+.DropdownOptions button{
+    margin-left: 10px;
+    font-size: 10px;
+}
+
 .DropdownOptions li {
     padding: 10px;
     cursor: pointer;
@@ -116,6 +121,31 @@
 
 
 .left{
-    margin-left: 30px;
+    margin-left: 20px;
     margin-right: 10px;
 }
+
+input[type="date"] {
+    background-color: white; /* Set background to white */
+    color: black; /* Ensure text is visible */
+    border: 1px solid #ccc; /* Add a subtle border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 5px; /* Add padding */
+    font-size: 14px; /* Ensure font size matches other inputs */
+    outline: none; /* Remove default outline */
+    transition: border-color 0.3s, box-shadow 0.3s; /* Smooth transition for focus */
+}
+
+input[type="date"]:focus {
+    border-color: #007bff; /* Highlight border on focus */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Subtle glow on focus */
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background-color: transparent; /* Ensure no background */
+    opacity: 1; /* Make the icon fully visible */
+    cursor: pointer; /* Pointer cursor for better UX */
+    filter: invert(0%) sepia(0%) saturate(7500%) hue-rotate(0deg) brightness(0%) contrast(100%);
+}
+
+

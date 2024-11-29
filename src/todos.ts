@@ -72,6 +72,15 @@ class TODO{
         this.saveProjects();
     }
 
+    updateItemDate(projectId: number, itemTitle: string, date: Date){
+        const project = this.projects.find((project) => project.id === projectId);
+        if (!project) throw new Error(`Project with ID ${projectId} not found`);
+        const item = project.items.find((item) => item.title === itemTitle);
+        if (!item) throw new Error(`Item with title ${itemTitle} not found`);
+        item.deadline = date;
+        this.saveProjects();
+    }
+
     removeItemFromProject(projectId: number, itemTitle: string) {
         const project = this.projects.find((project) => project.id === projectId);
         if (!project) throw new Error(`Project with ID ${projectId} not found`);
