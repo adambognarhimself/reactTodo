@@ -11,7 +11,7 @@ export type SideNavBarProps = {
     setNewName: (value: string) => void;
     inputRef: RefObject<HTMLInputElement>; // Ref for the input field
 };
-
+// The SideNavBar component is responsible for rendering a side navigation bar.
 export function SideNavBar({
     textContent,
     onClick,
@@ -21,7 +21,7 @@ export function SideNavBar({
     inputRef,
 }: SideNavBarProps) {
     const [showInputRow, setShowInputRow] = useState(false);
-
+// Logic for adding a project
     const handleAddProject = () => {
         onClick();
         setShowInputRow(false); // Hide the input row after adding

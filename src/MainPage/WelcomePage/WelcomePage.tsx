@@ -1,5 +1,5 @@
 import './WelcomePage.less'
-
+// The WelcomePage component is responsible for rendering a welcome message.
 export function WelcomePage(){
 
     return <div className={"WelcomePage"}>

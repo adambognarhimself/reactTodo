@@ -17,13 +17,13 @@ useEffect(() => {
                 onClose();
             }
         };
-
+// Add the event listener when the component mounts and remove it when it unmounts
         window.addEventListener('keydown', handleKeyDown);
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
         };
     }, [onClose]);
-
+// Return the modal overlay with the modal content
     return (
         <div className="ModalOverlay" onClick={onClose}>
             <div

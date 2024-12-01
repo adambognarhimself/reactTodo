@@ -8,7 +8,7 @@ export type ProjectCardProps = {
     onDelete: () => void;
 }
 
-
+// The ProjectCard component is responsible for rendering a single project card.
 export function ProjectCard({ textContent, onClick, iconName, onDelete }: ProjectCardProps) {
     return <button class="ProjectCard" onClick={onClick}>
         <p>{textContent}</p>

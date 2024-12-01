@@ -10,7 +10,7 @@ export type SideBarProps = {
     onFilterClick: () => void;
     onStatsClick: () => void;
 };
-
+// The SideBar component is responsible for rendering the sidebar of the main page.
 export function SideBar({ setSelectedProject, onFilterClick, onStatsClick }: SideBarProps) {
     const [projects, setProjects] = useState(todo.getProjects());
     const [newName, setNewName] = useState("");

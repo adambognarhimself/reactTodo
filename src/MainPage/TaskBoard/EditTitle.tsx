@@ -7,7 +7,7 @@ export type EditTitleProps = {
     editTask: () => void;
     cancelNewTask: () => void;
 };
-
+// The EditTitle component is responsible for rendering an input field for editing a task title.
 export function EditTitle({ value, onChange, onKeyDown, editTask, cancelNewTask }: EditTitleProps) {
     return (
         <div className="EditTitleRow">

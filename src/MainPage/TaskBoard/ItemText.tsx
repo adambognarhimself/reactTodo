@@ -8,7 +8,7 @@ export type Props = {
     prio?: Priority;
 }
 
-
+// The ItemText component is responsible for rendering the text of a todo item.
 export function ItemText({ title, deadline, prio }: Props) {
 
     return <div className="ItemText">

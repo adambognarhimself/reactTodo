@@ -17,8 +17,11 @@ export type BoardItemProps = {
 
 
 };
-
+// The BoardItem component is responsible for rendering a single todo item.
 export function BoardItem({ title, onDelete, onMove, onEditTitle, onSaveDate, deadline, prio, onEditPriority }: BoardItemProps) {
+
+    //States to check if the modal is open, the position of the modal, if the item is in edit mode, the edited title, 
+    //the selected date, the position of the move modal, the position of the priority modal
     const [showModal, setShowModal] = useState(false);
     const [showMoveModal, setMoveModal] = useState(false);
     const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 });
@@ -27,7 +30,7 @@ export function BoardItem({ title, onDelete, onMove, onEditTitle, onSaveDate, de
     const [editedTitle, setEditedTitle] = useState(title); // Track the edited title
     const [selectedDate, setSelectedDate] = useState(deadline ? deadline : null); // Track the selected date
 
-
+    
     const [showPriorityModal, setPriorityModal] = useState(false);
     const [priorityModalPosition, setPriorityModalPosition] = useState({ top: 0, left: 0 });
 
@@ -122,9 +125,10 @@ export function BoardItem({ title, onDelete, onMove, onEditTitle, onSaveDate, de
             setShowModal(false); 
         }
     };
-
+// Return the BoardItem component with the appropriate props
     return (
         <div className={`BoardItem ${isEditing ? 'editing' : ''}`}>
+            {/*// If the item is in edit mode, render the EditTitle component, otherwise render the ItemText component */}
             {isEditing ? (
                 <EditTitle
                     value={editedTitle}
@@ -138,14 +142,14 @@ export function BoardItem({ title, onDelete, onMove, onEditTitle, onSaveDate, de
                 />
             ) : (
                 <>
-
+                    {/*// Render the ItemText component with the task details */}
                     <ItemText title={title} deadline={deadline} prio={prio}/>
 
                     <button onClick={(e) => openModal(e)}>
                         <span class="material-symbols-outlined">edit</span>
                     </button>
                     
-                    
+                    {/*// If the modal is open, render the Modal component with the appropriate options */}
                     {showModal && (
                         <Modal position={modalPosition} onClose={closeModal}>
                             <ul className="DropdownOptions">
@@ -161,7 +165,7 @@ export function BoardItem({ title, onDelete, onMove, onEditTitle, onSaveDate, de
                             </ul>
                         </Modal>
                     )}
-
+{/*// If the move modal is open, render the Modal component with the appropriate options */}
                     {showMoveModal && (
                         <Modal position={moveModalPosition} onClose={closeMoveModal}>
                             <ul className="DropdownOptions">
@@ -171,7 +175,7 @@ export function BoardItem({ title, onDelete, onMove, onEditTitle, onSaveDate, de
                             </ul>
                         </Modal>
                     )}
-
+{/*// If the priority modal is open, render the Modal component with the appropriate options */}
                     {showPriorityModal && (
                         <Modal position={priorityModalPosition} onClose={closePriorityModal}>
                             <ul className="DropdownOptions">

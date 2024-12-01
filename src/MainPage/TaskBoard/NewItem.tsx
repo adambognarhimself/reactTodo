@@ -7,7 +7,7 @@ export type NewItemProps = {
     addTask: () => void;
     cancelNewTask: () => void;
 }
-
+// The NewItem component is responsible for rendering an input field for adding a new task.
 export function NewItem({ value, onChange, onKeyDown, addTask, cancelNewTask }: NewItemProps) {
 
     return <div className="NewTaskRow">

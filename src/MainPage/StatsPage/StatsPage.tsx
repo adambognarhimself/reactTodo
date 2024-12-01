@@ -6,7 +6,7 @@ import './StatsPage.less';
 
 // Register Chart.js components
 ChartJS.register(ArcElement, Tooltip, Legend);
-
+// The StatsPage component is responsible for rendering a page of task state distribution.
 export function StatsPage() {
     const tasks = todo.getProjects().flatMap((project) => project.items);
 
@@ -28,7 +28,7 @@ export function StatsPage() {
             },
         ],
     };
-
+//Return a pie chart with the calculated data
     return (
         <div className="StatsPage">
             <h1>Task State Distribution</h1>

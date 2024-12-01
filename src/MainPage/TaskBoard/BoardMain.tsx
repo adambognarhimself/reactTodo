@@ -94,7 +94,7 @@ export function BoardMain({ projectId, state, triggerRefresh, onItemMoved, }: Bo
     };
 
     if (!project) return null;
-
+// Return the BoardMain component with the appropriate props
     return (
         <div className="BoardMain">
 
@@ -102,7 +102,7 @@ export function BoardMain({ projectId, state, triggerRefresh, onItemMoved, }: Bo
 
 
             <div className="Items">
-
+{/*// If newTaskTitle is not null, render the NewItem component with the new task input field */}
                 {newTaskTitle !== null && (
                     <NewItem
                         value={newTaskTitle}
