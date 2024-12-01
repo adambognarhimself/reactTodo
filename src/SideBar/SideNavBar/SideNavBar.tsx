@@ -1,13 +1,15 @@
 import { useState } from "preact/hooks";
 import "./SideNavBar.less";
-import "../../googleIcon.less"
+import "../../googleIcon.less";
+import { RefObject } from "preact";
 
 export type SideNavBarProps = {
     textContent: string;
     onClick: () => void;
     iconName: string;
-    newName: string; // Input value
-    setNewName: (value: string) => void; // Input change handler
+    newName: string;
+    setNewName: (value: string) => void;
+    inputRef: RefObject<HTMLInputElement>; // Ref for the input field
 };
 
 export function SideNavBar({
@@ -16,39 +18,44 @@ export function SideNavBar({
     iconName,
     newName,
     setNewName,
+    inputRef,
 }: SideNavBarProps) {
     const [showInputRow, setShowInputRow] = useState(false);
 
     const handleAddProject = () => {
-        onClick(); // Trigger the `addProject` function in `SideBar`
-        setShowInputRow(!showInputRow); // Hide the second row
+        onClick();
+        setShowInputRow(false); // Hide the input row after adding
+    };
+
+    const toggleInputRow = () => {
+        setShowInputRow((prev) => !prev);
+        if (!showInputRow) {
+            setTimeout(() => {
+                inputRef.current?.focus(); // Focus input when row is displayed
+            }, 0); // Ensure DOM update before focusing
+        }
     };
 
     return (
         <div className="SideNavBar">
-            {/* First row */}
             <div className="row">
                 <p>{textContent}</p>
-                <button onClick={() => setShowInputRow(!showInputRow)}>
-                    <span class="material-symbols-outlined">
-                        {iconName}
-                    </span>
+                <button onClick={toggleInputRow}>
+                    <span className="material-symbols-outlined">{iconName}</span>
                 </button>
             </div>
 
-            {/* Second row: Conditionally rendered */}
             {showInputRow && (
                 <div className="row">
                     <input
+                        ref={inputRef} // Connect the ref to the input field
                         type="text"
                         value={newName}
                         onChange={(e) => setNewName((e.target as HTMLInputElement).value)}
                         placeholder="Enter project name"
                     />
                     <button onClick={handleAddProject}>
-                    <span class="material-symbols-outlined">
-                        check
-                    </span>
+                        <span className="material-symbols-outlined">check</span>
                     </button>
                 </div>
             )}

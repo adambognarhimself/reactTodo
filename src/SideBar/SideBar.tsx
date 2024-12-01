@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { ProjectCard } from "./ProjectCard/ProjectCard";
 import { SideNavBar } from "./SideNavBar/SideNavBar";
 import "./SideBar.less";
@@ -6,15 +6,15 @@ import { todo } from "../todos";
 import { Footer } from "./SideNavBar/SideFooter/Footer";
 
 export type SideBarProps = {
-    setSelectedProject: (id: number) => void; // Callback to select a project
-    onFilterClick: () => void;               // Callback for the Filter button
-    onStatsClick: () => void;                // Callback for the Stats button
+    setSelectedProject: (id: number) => void;
+    onFilterClick: () => void;
+    onStatsClick: () => void;
 };
-
 
 export function SideBar({ setSelectedProject, onFilterClick, onStatsClick }: SideBarProps) {
     const [projects, setProjects] = useState(todo.getProjects());
     const [newName, setNewName] = useState("");
+    const inputRef = useRef<HTMLInputElement>(null); // Ref for the input field
 
     const refreshProjects = () => {
         setProjects(todo.getProjects());
@@ -25,6 +25,13 @@ export function SideBar({ setSelectedProject, onFilterClick, onStatsClick }: Sid
         todo.addProject(newName);
         setNewName("");
         refreshProjects();
+        focusInput(); // Focus the input field after adding
+    };
+
+    const focusInput = () => {
+        if (inputRef.current) {
+            inputRef.current.focus(); // Set focus to the input field
+        }
     };
 
     const deleteProject = (id: number) => {
@@ -34,16 +41,15 @@ export function SideBar({ setSelectedProject, onFilterClick, onStatsClick }: Sid
 
     return (
         <div className="SideBar">
-            {/* Sidebar Navigation */}
             <SideNavBar
                 textContent="Your projects"
                 onClick={addProject}
                 iconName="add"
                 newName={newName}
                 setNewName={setNewName}
+                inputRef={inputRef} // Pass the ref to the child component
             />
 
-            {/* Project Cards */}
             <div className="projects">
                 {projects.map((project) => (
                     <ProjectCard

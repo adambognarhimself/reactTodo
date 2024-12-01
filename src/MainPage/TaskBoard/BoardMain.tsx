@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'preact/hooks';
+import { useEffect, useMemo, useState } from 'preact/hooks';
 import { BoardHeader } from './BoardHeader';
 import { BoardItem } from './BoardItem';
 import './BoardMain.less';
@@ -23,6 +23,11 @@ export function BoardMain({ projectId, state, triggerRefresh, onItemMoved, }: Bo
     useEffect(() => {
         refreshProject();
     }, [projectId, triggerRefresh]); // Listen for both projectId and triggerRefresh changes
+
+    const filteredTasks = useMemo(() => {
+        if (!project) return [];
+        return project.items.filter((item) => item.state === state);
+    }, [project, state]);
 
     const refreshProject = () => {
         setProject(todo.getProjectById(projectId));
