@@ -3,24 +3,30 @@ import { ProjectCard } from "./ProjectCard/ProjectCard";
 import { SideNavBar } from "./SideNavBar/SideNavBar";
 import "./SideBar.less";
 import { todo } from "../todos";
+import { Footer } from "./SideNavBar/SideFooter/Footer";
 
-export function SideBar({setSelectedProject} : {setSelectedProject: (id:number) => void}) {
-    const [projects, setProjects] = useState(todo.getProjects()); // Initial cards
+export type SideBarProps = {
+    setSelectedProject: (id: number) => void; // Callback to select a project
+    onFilterClick: () => void;               // Callback for the Filter button
+    onStatsClick: () => void;                // Callback for the Stats button
+};
+
+
+export function SideBar({ setSelectedProject, onFilterClick, onStatsClick }: SideBarProps) {
+    const [projects, setProjects] = useState(todo.getProjects());
     const [newName, setNewName] = useState("");
 
     const refreshProjects = () => {
         setProjects(todo.getProjects());
     };
 
-    // Add a new project
     const addProject = () => {
-        if (newName.trim() === "") return; // Prevent empty names
+        if (newName.trim() === "") return;
         todo.addProject(newName);
         setNewName("");
         refreshProjects();
     };
 
-    // Delete a project
     const deleteProject = (id: number) => {
         todo.deleteProject(id);
         refreshProjects();
@@ -43,12 +49,14 @@ export function SideBar({setSelectedProject} : {setSelectedProject: (id:number) 
                     <ProjectCard
                         key={project.id}
                         textContent={project.title}
-                        onClick={() => setSelectedProject(project.id)} 
+                        onClick={() => setSelectedProject(project.id)}
                         iconName="delete"
                         onDelete={() => deleteProject(project.id)}
                     />
                 ))}
             </div>
+
+            <Footer onFilterClick={onFilterClick} onStatsClick={onStatsClick} />
         </div>
     );
 }

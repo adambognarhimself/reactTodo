@@ -2,6 +2,8 @@ import { useState } from 'preact/hooks';
 import './BoardItem.less';
 import { Modal } from './Modal';
 import { EditTitle } from './EditTitle';
+import { Priority } from '../../todos';
+import { ItemText } from './ItemText';
 
 export type BoardItemProps = {
     title: string;
@@ -10,10 +12,13 @@ export type BoardItemProps = {
     onEditTitle: (newTitle: string) => void;
     onSaveDate: (date: Date) => void;
     deadline?: Date; // Add this prop to accept the initial deadline
+    prio?: Priority; // Add this prop to accept the initial deadline
+    onEditPriority: (newPriority: Priority) => void;
+
 
 };
 
-export function BoardItem({ title, onDelete, onMove, onEditTitle, onSaveDate, deadline }: BoardItemProps) {
+export function BoardItem({ title, onDelete, onMove, onEditTitle, onSaveDate, deadline, prio, onEditPriority }: BoardItemProps) {
     const [showModal, setShowModal] = useState(false);
     const [showMoveModal, setMoveModal] = useState(false);
     const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 });
@@ -21,6 +26,10 @@ export function BoardItem({ title, onDelete, onMove, onEditTitle, onSaveDate, de
     const [isEditing, setIsEditing] = useState(false); // Track if the item is in edit mode
     const [editedTitle, setEditedTitle] = useState(title); // Track the edited title
     const [selectedDate, setSelectedDate] = useState(deadline ? deadline : null); // Track the selected date
+
+
+    const [showPriorityModal, setPriorityModal] = useState(false);
+    const [priorityModalPosition, setPriorityModalPosition] = useState({ top: 0, left: 0 });
 
 
     const openModal = (e: MouseEvent) => {
@@ -55,8 +64,30 @@ export function BoardItem({ title, onDelete, onMove, onEditTitle, onSaveDate, de
         setMoveModal(true);
     };
 
+    const openPriorityModal = (e: MouseEvent) => {
+        e.preventDefault();
+        const button = e.target as HTMLElement;
+        const rect = button.getBoundingClientRect();
+        const isCloseToRightEdge = window.innerWidth - rect.right < 200;
+        const newLeft = isCloseToRightEdge
+            ? rect.left + window.scrollX - 230
+            : rect.right + window.scrollX + 15;
+
+        setPriorityModalPosition({
+            top: rect.top + window.scrollY,
+            left: newLeft,
+        });
+        setPriorityModal(true);
+    };
+
     const closeModal = () => setShowModal(false);
     const closeMoveModal = () => setMoveModal(false);
+    const closePriorityModal = () => setPriorityModal(false);
+
+    const handleEditPriority = (newPriority: Priority) => {
+        onEditPriority(newPriority);
+        closePriorityModal();
+    };
 
     const handleEditName = () => {
         setIsEditing(true); // Switch to edit mode
@@ -103,14 +134,9 @@ export function BoardItem({ title, onDelete, onMove, onEditTitle, onSaveDate, de
                 />
             ) : (
                 <>
-                    {deadline ? (
-                        <p>{title} 
-                        {deadline && ` (${new Date(deadline).toISOString().slice(0, 10)})`} {/* Display deadline if it exists */}
-                        </p>
-                    ) : (
-                            <p>{title}</p>
-                        )
-                    }
+
+                    <ItemText title={title} deadline={deadline} prio={prio}/>
+
                     <button onClick={(e) => openModal(e)}>
                         <span class="material-symbols-outlined">edit</span>
                     </button>
@@ -125,6 +151,7 @@ export function BoardItem({ title, onDelete, onMove, onEditTitle, onSaveDate, de
                                 />
                                     <button onClick={saveDate}>Save Date</button> </li>
                                 <li onClick={(e) => openMoveModal(e)}>Move</li>
+                                <li onClick={(e) => openPriorityModal(e)}>Edit Priority</li>
                                 <li onClick={onDelete}>Delete</li>
                             </ul>
                         </Modal>
@@ -136,6 +163,16 @@ export function BoardItem({ title, onDelete, onMove, onEditTitle, onSaveDate, de
                                 <li onClick={() => { onMove('TODO'); closeMoveModal(); }}>TODO</li>
                                 <li onClick={() => { onMove('IN PROGRESS'); closeMoveModal(); }}>IN PROGRESS</li>
                                 <li onClick={() => { onMove('DONE'); closeMoveModal(); }}>DONE</li>
+                            </ul>
+                        </Modal>
+                    )}
+
+                    {showPriorityModal && (
+                        <Modal position={priorityModalPosition} onClose={closePriorityModal}>
+                            <ul className="DropdownOptions">
+                                <li onClick={() => handleEditPriority(Priority.LOW)}>Low</li>
+                                <li onClick={() => handleEditPriority(Priority.MEDIUM)}>Medium</li>
+                                <li onClick={() => handleEditPriority(Priority.HIGH)}>High</li>
                             </ul>
                         </Modal>
                     )}

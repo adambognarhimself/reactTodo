@@ -1,0 +1,41 @@
+.Board{
+    min-height: 40px; /* Set a minimum height */
+    width: 70%; /* Ensure it fills the grid column width */
+    box-sizing: border-box; /* Includes padding and border in width calculations */
+    text-align: center;
+    background-color: #f9f9f9; /* Optional background color for visibility */
+    border-radius: 10px;
+    box-shadow: 1;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    padding-bottom: 10px;
+}
+
+.Items{
+    padding: 0px 10px;
+    gap: 10px;
+    overflow-y: auto; 
+}
+
+.Header{
+    display: flex;
+    flex-direction: row; /* Align items horizontally */
+    align-items: start; /* Center vertically */
+    justify-items: center;
+    justify-content: space-between; /* Space between title and button */
+    padding: 15px 20px; /* Add spacing inside the header */
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #ededeb; /* Light gray background */
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+    margin-bottom: 10px; /* Add spacing between headers */
+    border-bottom: 2px solid #c7c7c1;
+}
+
+.Header p {
+    font-size: 18px; /* Slightly larger font for the title */
+    font-weight: bold; /* Make the title bold */
+    color: #333; /* Darker text color */
+    margin: 0; /* Remove default margins */
+    padding-top: 6px;
+}

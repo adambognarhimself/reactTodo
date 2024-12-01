@@ -2,7 +2,7 @@ import { useEffect, useState } from 'preact/hooks';
 import { BoardHeader } from './BoardHeader';
 import { BoardItem } from './BoardItem';
 import './BoardMain.less';
-import { State, todo } from '../../todos';
+import { Priority, State, todo } from '../../todos';
 import { WelcomePage } from '../WelcomePage/WelcomePage';
 import { NewItem } from './NewItem';
 
@@ -65,6 +65,12 @@ export function BoardMain({ projectId, state, triggerRefresh, onItemMoved, }: Bo
         console.log("Project after moving item:", todo.getProjectById(projectId));
         onItemMoved();
     }
+    const updateTaskPrio =(title: string, prio: Priority)=>{
+        todo.updateItemPrio(projectId, title,prio);
+        console.log("date saved")
+        console.log("Project after moving item:", todo.getProjectById(projectId));
+        onItemMoved();
+    }
 
     // Delete a task
     const deleteTask = (taskTitle: string) => {
@@ -76,9 +82,9 @@ export function BoardMain({ projectId, state, triggerRefresh, onItemMoved, }: Bo
 
     return (
         <div className="BoardMain">
-            <div className="Header">
+            
                 <BoardHeader title={state} onClick={() => setNewTaskTitle("")} iconName="add" />
-            </div>
+            
 
             <div className="Items">
 
@@ -105,6 +111,8 @@ export function BoardMain({ projectId, state, triggerRefresh, onItemMoved, }: Bo
                             onEditTitle={(title)=> updateTasktitle(item.title, title)}
                             onSaveDate={(date) => updateTaskDate(item.title,date)}
                             deadline={item.deadline}
+                            onEditPriority={(prio) => updateTaskPrio(item.title, prio)}
+                            prio={item.priority}
                         />
                     ))}
             </div>

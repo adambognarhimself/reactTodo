@@ -8,12 +8,19 @@ export type DataDto = {
     title: string;
     state: State
     deadline?: Date;
+    priority?: Priority;
 }
 
 export enum State {
     TODO = "TODO",
     IN_PROGRESS = "IN PROGRESS",
     DONE = "DONE",
+}
+
+export enum Priority {
+    HIGH = "HIGH",
+    MEDIUM = "MEDIUM",
+    LOW = "LOW",
 }
 
 class TODO{
@@ -81,11 +88,24 @@ class TODO{
         this.saveProjects();
     }
 
+    updateItemPrio(projectId: number, itemTitle: string, prio: Priority){
+        const project = this.projects.find((project) => project.id === projectId);
+        if (!project) throw new Error(`Project with ID ${projectId} not found`);
+        const item = project.items.find((item) => item.title === itemTitle);
+        if (!item) throw new Error(`Item with title ${itemTitle} not found`);
+        item.priority = prio;
+        this.saveProjects();
+    }
+
     removeItemFromProject(projectId: number, itemTitle: string) {
         const project = this.projects.find((project) => project.id === projectId);
         if (!project) throw new Error(`Project with ID ${projectId} not found`);
         project.items = project.items.filter((item) => item.title !== itemTitle);
         this.saveProjects();
+    }
+
+    getItemsByPriority(prio: Priority) :DataDto[] {
+        return this.projects.flatMap(x=> x.items).filter(x=> x.priority === prio);
     }
 
     getProjects() {
