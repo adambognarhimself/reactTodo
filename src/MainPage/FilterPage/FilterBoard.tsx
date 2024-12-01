@@ -7,7 +7,7 @@ export type Props ={
     prio: Priority;
 
 }
-
+// The FilterBoard component is responsible for rendering a board of filtered todo items based on priority.
 export function FilterBoard({prio}: Props){
     const [project, setProject] = useState(todo.getItemsByPriority(prio));
 

@@ -6,10 +6,6 @@ import { todo } from './todos';
 
 function App() {
 
-	
-
-
-	console.log("Project after moving item:", todo.getProjectById(1));
 	return <Screen/>;
 }
 

@@ -37,7 +37,7 @@ export function StatsPage() {
                     data={taskStateData}
                     options={{
                         responsive: true,
-                        maintainAspectRatio: false, // Allow full use of container dimensions
+                        maintainAspectRatio: false, 
                     }}
                 />
             </div>

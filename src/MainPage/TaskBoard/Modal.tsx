@@ -10,8 +10,8 @@ export function Modal({
     onClose: () => void;
     position: { top: number; left: number };
 }) {
-    // Close the modal when pressing the Escape key
-    useEffect(() => {
+// Effect hook to close the modal when the Escape key is pressed
+useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
             if (e.key === 'Escape') {
                 onClose();

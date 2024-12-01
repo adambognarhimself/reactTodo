@@ -11,26 +11,26 @@
 
 .WelcomePage {
     display: flex;
-    flex-direction: column; /* Stack elements vertically */
-    align-items: center; /* Center elements horizontally */
-    justify-content: center; /* Center elements vertically */
-    height: 100vh; /* Full viewport height */
-    text-align: center; /* Center align text */
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    height: 100vh; 
+    text-align: center; 
 }
 
 .WelcomePage p {
-    opacity: 0; /* Initially hidden */
-    animation: floatIn 1s ease-out forwards; /* Apply animation */
+    opacity: 0; 
+    animation: floatIn 1s ease-out forwards; 
     margin: 0;
 }
 
 .WelcomePage p:first-child {
-    font-size: 3rem; /* Larger font size for the first <p> */
-    font-weight: bold; /* Optional: Make it bold */
-    animation-delay: 0s; /* No delay for the first text */
+    font-size: 3rem; 
+    font-weight: bold; 
+    animation-delay: 0s; 
 }
 
 .WelcomePage p:not(:first-child) {
-    font-size: 1.5rem; /* Slightly smaller font for other <p> elements */
-    animation-delay: 0.3s; /* Delay the animation for the second text */
+    font-size: 1.5rem; 
+    animation-delay: 0.3s; 
 }

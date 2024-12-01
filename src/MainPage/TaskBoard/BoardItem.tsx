@@ -31,7 +31,7 @@ export function BoardItem({ title, onDelete, onMove, onEditTitle, onSaveDate, de
     const [showPriorityModal, setPriorityModal] = useState(false);
     const [priorityModalPosition, setPriorityModalPosition] = useState({ top: 0, left: 0 });
 
-
+    // Function to open the modal for editing the task
     const openModal = (e: MouseEvent) => {
         e.preventDefault();
         const button = e.target as HTMLElement;
@@ -47,7 +47,7 @@ export function BoardItem({ title, onDelete, onMove, onEditTitle, onSaveDate, de
         });
         setShowModal(true);
     };
-
+// Function to open the modal for moving the task
     const openMoveModal = (e: MouseEvent) => {
         e.preventDefault();
         const button = e.target as HTMLElement;
@@ -63,7 +63,7 @@ export function BoardItem({ title, onDelete, onMove, onEditTitle, onSaveDate, de
         });
         setMoveModal(true);
     };
-
+// Function to open the modal for editing the task priority
     const openPriorityModal = (e: MouseEvent) => {
         e.preventDefault();
         const button = e.target as HTMLElement;
@@ -79,43 +79,47 @@ export function BoardItem({ title, onDelete, onMove, onEditTitle, onSaveDate, de
         });
         setPriorityModal(true);
     };
-
+// Function to close the modal for editing task details
     const closeModal = () => setShowModal(false);
+    // Function to close the modal for moving the task
     const closeMoveModal = () => setMoveModal(false);
+    // Function to close the modal for editing priority
     const closePriorityModal = () => setPriorityModal(false);
-
+// Function to handle priority edit action and update priority
     const handleEditPriority = (newPriority: Priority) => {
         onEditPriority(newPriority);
         closePriorityModal();
     };
-
+// Function to switch the task into editing mode
     const handleEditName = () => {
-        setIsEditing(true); // Switch to edit mode
-        setShowModal(false); // Close the modal
+        setIsEditing(true); 
+        setShowModal(false); 
     };
-
+// Function to save the edited task title
     const handleSaveEdit = () => {
         if (editedTitle.trim()) {
-            onEditTitle(editedTitle.trim()); // Save the new title
+            onEditTitle(editedTitle.trim()); 
         }
-        setIsEditing(false); // Exit edit mode
+        setIsEditing(false); 
     };
-
+// Function to cancel the title editing and revert changes
     const handleCancelEdit = () => {
-        setEditedTitle(title); // Revert changes
-        setIsEditing(false); // Exit edit mode
+        setEditedTitle(title); 
+        setIsEditing(false);
     };
 
+    // Function to handle the date change and update the selected date
     const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const selected = new Date((e.target as HTMLInputElement).value); // Convert string to Date object
-        setSelectedDate(selected); // Update state with the selected date
+        const selected = new Date((e.target as HTMLInputElement).value); 
+        setSelectedDate(selected); 
         console.log("Selected date:", selected.toISOString().slice(0, 10));
     };
 
+    // Function to save the selected date and close the modal
     const saveDate = () => {
         if (selectedDate) {
-            onSaveDate(selectedDate); // Call the save callback with the selected date
-            setShowModal(false); // Close the modal after saving
+            onSaveDate(selectedDate); 
+            setShowModal(false); 
         }
     };
 
@@ -140,7 +144,8 @@ export function BoardItem({ title, onDelete, onMove, onEditTitle, onSaveDate, de
                     <button onClick={(e) => openModal(e)}>
                         <span class="material-symbols-outlined">edit</span>
                     </button>
-
+                    
+                    
                     {showModal && (
                         <Modal position={modalPosition} onClose={closeModal}>
                             <ul className="DropdownOptions">

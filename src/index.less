@@ -1,23 +1,23 @@
 html {
-    font-family: 'Segoe UI', sans-serif; // Font
-    font-size: 16px; // Font mérete (16px=12pt)
-    line-height: 1.5; // Sormagasság, 16px*1.5=24px, tipikus mostanában
-    background: #333336; // Sötét téma sötét háttérrel
-    color: white; // Sötét téma fehér betűkkel
+    font-family: 'Segoe UI', sans-serif; 
+    font-size: 16px; 
+    line-height: 1.5; 
+    background: #333336; 
+    color: white; 
 }
 
 html,
 body,
 div {
-    margin: 0; // CSS reset
-    padding: 0; // CSS reset
-    display: grid; // grid-re állunk át mindenhol
-    grid: minmax(0, 1fr) / minmax(0, 1fr); // Az egyetlen gyerek szülő méretű
+    margin: 0; 
+    padding: 0; 
+    display: grid; 
+    grid: minmax(0, 1fr) / minmax(0, 1fr); 
 }
 
 body {
-    min-height: 100vh; // ablak méretű
-    max-height: 100vh; // ablak méretű
+    min-height: 100vh; 
+    max-height: 100vh;
     background-color: var(--html-background);
     color: var(--html-color);
     font-size: var(--font-size);
@@ -30,17 +30,17 @@ a {
     font-family: inherit;
     font-size: inherit;
     line-height: inherit;
-    border: 0; // ne legyen kerete a buttonnak és az inputnak
+    border: 0; 
     color: inherit;
 }
 
 input {
-    background: black; // Sötét téma
+    background: black; 
 }
 
 button {
-    padding: 0; // Tágas
-    font-weight: 600; // Bold
+    padding: 0;
+    font-weight: 600; 
     background: transparent;
 
 }

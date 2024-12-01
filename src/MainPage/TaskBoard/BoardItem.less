@@ -1,44 +1,44 @@
 .BoardItem {
     display: flex;
-    flex-direction: row; /* Align items horizontally */
-    align-items: center; /* Vertically center items */
-    justify-content: space-between; /* Space between text and button */
-    padding: 15px 20px; /* Add spacing inside the header */
+    flex-direction: row;
+    align-items: center; 
+    justify-content: space-between; 
+    padding: 15px 20px; 
     width: 100%;
     box-sizing: border-box;
-    background-color: #f3f3f3; /* Light gray background */
+    background-color: #f3f3f3; 
     border-radius: 8px;
-    height: 100%; /* Optional: set consistent height for alignment */
+    height: 100%; 
 }
 
 .BoardItem p {
-    font-size: 18px; /* Slightly larger font for the title */
-    font-weight: normal; /* Keep the title in normal weight */
-    color: #333; /* Darker text color */
-    margin: 0; /* Remove default margins */
-    padding: 0; /* Remove additional padding */
+    font-size: 18px; 
+    font-weight: normal; 
+    color: #333; 
+    margin: 0; 
+    padding: 0; 
 }
 
 .BoardItem button {
-    background-color: gray; /* Green background */
-    color: white; /* White text */
-    border: none; /* Remove default border */
-    border-radius: 5px; /* Rounded corners for the button */
-    padding: 5px 5px 5px 5px; /* Add padding to the button */
-    cursor: pointer; /* Change cursor to pointer on hover */
-    font-size: 0px; /* Slightly larger font size for the button */
+    background-color: gray; 
+    color: white; 
+    border: none; 
+    border-radius: 5px; 
+    padding: 5px 5px 5px 5px; 
+    cursor: pointer;
+    font-size: 0px;
     transition: transform 0.1s ease, background 0.2s ease, box-shadow 0.2s ease;
-    display: inline-block; /* Fix any inline rendering inconsistencies */
+    display: inline-block; 
     text-align: center;
-    font-weight: normal; /* Explicitly set normal weight */
+    font-weight: normal; 
 }
 
 .BoardItem button:hover {
-    background-color: darkgrey /* Darker green on hover */
+    background-color: darkgrey 
 }
 
 .BoardItem button:active {
-    transform: scale(0.95); /* Slightly shrink the button when clicked */
+    transform: scale(0.95); 
 }
 
 .DropdownOptions {
@@ -64,16 +64,16 @@
 
 
 .BoardItem.editing {
-    background-color: #e0e0e0; /* Light gray background in edit mode */
+    background-color: #e0e0e0; 
     padding-top: 23px;
     padding-left: 10px;
 }
 
 .EditTitleRow {
     display: flex;
-    flex-direction: row; /* Align items horizontally */
-    align-items: center; /* Vertically center items */
-    justify-content: space-between; /* Space between input and buttons */
+    flex-direction: row; 
+    align-items: center; 
+    justify-content: space-between; 
     width: 100%;
     box-sizing: border-box;
 }
@@ -126,25 +126,25 @@
 }
 
 input[type="date"] {
-    background-color: white; /* Set background to white */
-    color: black; /* Ensure text is visible */
-    border: 1px solid #ccc; /* Add a subtle border */
-    border-radius: 5px; /* Rounded corners */
-    padding: 5px; /* Add padding */
-    font-size: 14px; /* Ensure font size matches other inputs */
-    outline: none; /* Remove default outline */
-    transition: border-color 0.3s, box-shadow 0.3s; /* Smooth transition for focus */
+    background-color: white; 
+    color: black;
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    padding: 5px; 
+    font-size: 14px;
+    outline: none; 
+    transition: border-color 0.3s, box-shadow 0.3s; 
 }
 
 input[type="date"]:focus {
-    border-color: #007bff; /* Highlight border on focus */
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Subtle glow on focus */
+    border-color: #007bff; 
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); 
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
-    background-color: transparent; /* Ensure no background */
-    opacity: 1; /* Make the icon fully visible */
-    cursor: pointer; /* Pointer cursor for better UX */
+    background-color: transparent;
+    opacity: 1; 
+    cursor: pointer; 
     filter: invert(0%) sepia(0%) saturate(7500%) hue-rotate(0deg) brightness(0%) contrast(100%);
 }
 

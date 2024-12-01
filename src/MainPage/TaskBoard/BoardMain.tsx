@@ -19,65 +19,75 @@ export function BoardMain({ projectId, state, triggerRefresh, onItemMoved, }: Bo
     const [newTaskTitle, setNewTaskTitle] = useState(null);
     const [editTaskTitle, setEditTaskTitle] = useState(null);
 
-    // Fetch project data when projectId changes or triggerRefresh updates
+    // Effect hook to fetch project data when projectId changes or triggerRefresh updates
     useEffect(() => {
         refreshProject();
-    }, [projectId, triggerRefresh]); // Listen for both projectId and triggerRefresh changes
+    }, [projectId, triggerRefresh]);
 
+    // Memoized function to filter tasks by state (TODO, IN PROGRESS, DONE)
     const filteredTasks = useMemo(() => {
         if (!project) return [];
         return project.items.filter((item) => item.state === state);
     }, [project, state]);
 
+    // Function to refresh the project data by fetching it again using the projectId
     const refreshProject = () => {
         setProject(todo.getProjectById(projectId));
     };
 
+    // Function to add a new task to the project if the title is valid
     const addTask = () => {
         if (newTaskTitle && newTaskTitle.trim()) {
             todo.addItemToProject(projectId, { title: newTaskTitle.trim(), state });
-            setNewTaskTitle(null); // Clear the input row
-            onItemMoved(); // Trigger a global refresh
+            setNewTaskTitle(null);
+            onItemMoved();
         }
     };
 
+    // Function to cancel the new task input and clear the state
     const cancelNewTask = () => {
-        setNewTaskTitle(null); // Cancel the new task input
+        setNewTaskTitle(null);
     };
+    // Function to handle keydown events in the input field (add task on Enter, cancel on Escape)
 
     const handleKeyDown = (event: KeyboardEvent) => {
         if (event.key === 'Enter') {
-            addTask(); // Add task on Enter
+            addTask();
         } else if (event.key === 'Escape') {
-            cancelNewTask(); // Cancel input on Escape
+            cancelNewTask();
         }
     };
 
-    // Update task state
+    // Function to update the state of a task (e.g., move it to TODO, IN PROGRESS, DONE)
     const updateTaskState = (taskTitle: string, newState: State) => {
         todo.updateItemState(projectId, taskTitle, newState);
         onItemMoved();
     };
+    // Function to update the title of a task
 
-    const updateTasktitle =(title: string, newTitle: string)=>{
-        todo.updateItemTitle(projectId, title,newTitle);
+    const updateTasktitle = (title: string, newTitle: string) => {
+        todo.updateItemTitle(projectId, title, newTitle);
         onItemMoved();
     }
+    // Function to update the deadline of a task
 
-    const updateTaskDate =(title: string, date: Date)=>{
-        todo.updateItemDate(projectId, title,date);
+    const updateTaskDate = (title: string, date: Date) => {
+        todo.updateItemDate(projectId, title, date);
         console.log("date saved")
         console.log("Project after moving item:", todo.getProjectById(projectId));
         onItemMoved();
     }
-    const updateTaskPrio =(title: string, prio: Priority)=>{
-        todo.updateItemPrio(projectId, title,prio);
+    // Function to update the priority of a task
+
+    const updateTaskPrio = (title: string, prio: Priority) => {
+        todo.updateItemPrio(projectId, title, prio);
         console.log("date saved")
         console.log("Project after moving item:", todo.getProjectById(projectId));
         onItemMoved();
     }
 
-    // Delete a task
+    // Function to delete a task from the project
+
     const deleteTask = (taskTitle: string) => {
         todo.removeItemFromProject(projectId, taskTitle);
         onItemMoved();
@@ -87,9 +97,9 @@ export function BoardMain({ projectId, state, triggerRefresh, onItemMoved, }: Bo
 
     return (
         <div className="BoardMain">
-            
-                <BoardHeader title={state} onClick={() => setNewTaskTitle("")} iconName="add" />
-            
+
+            <BoardHeader title={state} onClick={() => setNewTaskTitle("")} iconName="add" />
+
 
             <div className="Items">
 
@@ -113,8 +123,8 @@ export function BoardMain({ projectId, state, triggerRefresh, onItemMoved, }: Bo
                             title={item.title}
                             onDelete={() => deleteTask(item.title)} // Example action
                             onMove={(newState) => updateTaskState(item.title, newState as State)}
-                            onEditTitle={(title)=> updateTasktitle(item.title, title)}
-                            onSaveDate={(date) => updateTaskDate(item.title,date)}
+                            onEditTitle={(title) => updateTasktitle(item.title, title)}
+                            onSaveDate={(date) => updateTaskDate(item.title, date)}
                             deadline={item.deadline}
                             onEditPriority={(prio) => updateTaskPrio(item.title, prio)}
                             prio={item.priority}

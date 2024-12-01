@@ -14,25 +14,29 @@ export type SideBarProps = {
 export function SideBar({ setSelectedProject, onFilterClick, onStatsClick }: SideBarProps) {
     const [projects, setProjects] = useState(todo.getProjects());
     const [newName, setNewName] = useState("");
-    const inputRef = useRef<HTMLInputElement>(null); // Ref for the input field
+    const inputRef = useRef<HTMLInputElement>(null); 
+// Function to refresh the list of projects by fetching the latest data
 
     const refreshProjects = () => {
         setProjects(todo.getProjects());
     };
+// Function to add a new project if the input is valid (not empty)
 
     const addProject = () => {
         if (newName.trim() === "") return;
         todo.addProject(newName);
         setNewName("");
         refreshProjects();
-        focusInput(); // Focus the input field after adding
+        focusInput();
     };
+// Function to focus the input field to allow the user to continue typing
 
     const focusInput = () => {
         if (inputRef.current) {
-            inputRef.current.focus(); // Set focus to the input field
+            inputRef.current.focus(); 
         }
     };
+// Function to delete a project by its ID
 
     const deleteProject = (id: number) => {
         todo.deleteProject(id);
@@ -47,7 +51,7 @@ export function SideBar({ setSelectedProject, onFilterClick, onStatsClick }: Sid
                 iconName="add"
                 newName={newName}
                 setNewName={setNewName}
-                inputRef={inputRef} // Pass the ref to the child component
+                inputRef={inputRef} 
             />
 
             <div className="projects">

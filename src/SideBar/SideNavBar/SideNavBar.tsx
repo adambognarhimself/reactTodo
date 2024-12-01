@@ -27,12 +27,13 @@ export function SideNavBar({
         setShowInputRow(false); // Hide the input row after adding
     };
 
+    // Logic for focusing input
     const toggleInputRow = () => {
         setShowInputRow((prev) => !prev);
         if (!showInputRow) {
             setTimeout(() => {
                 inputRef.current?.focus(); // Focus input when row is displayed
-            }, 0); // Ensure DOM update before focusing
+            }, 0); 
         }
     };
 
@@ -48,7 +49,7 @@ export function SideNavBar({
             {showInputRow && (
                 <div className="row">
                     <input
-                        ref={inputRef} // Connect the ref to the input field
+                        ref={inputRef} 
                         type="text"
                         value={newName}
                         onChange={(e) => setNewName((e.target as HTMLInputElement).value)}
